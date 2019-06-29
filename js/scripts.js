@@ -35,6 +35,11 @@ for (let i = 1; i <= 12; i++) {
     ctx.moveTo(sideLength * i, 0)
     ctx.lineTo(sideLength * i, sideLength * 21)
 }
+// vertical lines
+for (let i = 1; i <= 20; i++) {
+    ctx.moveTo(0, sideLength * i)
+    ctx.lineTo(sideLength * 12, sideLength * i)
+}
 
 // // draw a grid over the matrix
 // ctx.beginPath()
