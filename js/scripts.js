@@ -20,7 +20,13 @@ const ctx = document.getElementById('canvas').getContext('2d')
 // class for Line shape
 class LineShape {
     constructor() {
-        this.xPosition = Math.floor(Math.random() * (mapWidth - 3 * sideLength))
+        this.xPosition = this.getRandomX()
+    }
+
+    getRandomX = () => {
+        const rand = Math.floor(Math.random() * (mapWidth - 3 * sideLength))
+        const remainder = rand % sideLength
+        return rand - remainder
     }
 
     draw = y => {
