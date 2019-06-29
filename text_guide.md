@@ -8,6 +8,12 @@ Every 'second', the following needs to happen:
 
 Store a list of:
     - each shape
-        - color
         - position
-        - shape
+        - type
+
+
+Shape(type, color):
+    function to draw shape
+
+    store type
+    store all edges

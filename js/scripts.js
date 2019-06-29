@@ -1,18 +1,50 @@
 const canvas = document.querySelector('#canvas')
 
-// Set up the board
-const width = (canvas.width = 528)
-const bsl = 44
-
-const height = (canvas.height = window.screen.availHeight - bsl * 3)
-
-const halfL = bsl / 2
+const sideLength = 44
+const halfL = sideLength / 2
 const blocksHigh = 20
 const blocksWide = 12
+
 // margin 4 on each side
 // 12 blocks wide, 20 blocks high
 
+// Set up the canvas
+const mapWidth = 528
+canvas.width = mapWidth
+
+const mapHeight = window.screen.availHeight - sideLength * 3
+canvas.height = mapHeight
+
 const ctx = document.getElementById('canvas').getContext('2d')
+
+// class for Line shape
+class LineShape {
+    constructor() {
+        this.xPosition = Math.floor(Math.random() * (mapWidth - 3 * sideLength))
+    }
+
+    draw = y => {
+        ctx.beginPath()
+        ctx.moveTo(this.xPosition, y)
+        ctx.lineTo(this.xPosition + 4 * sideLength, y)
+        ctx.lineTo(this.xPosition + 4 * sideLength, y - sideLength)
+        ctx.lineTo(this.xPosition, y - sideLength)
+        ctx.lineTo(this.xPosition, y)
+        ctx.lineTo(this.xPosition + 1 * sideLength, y)
+        ctx.lineTo(this.xPosition + 1 * sideLength, y - sideLength)
+        ctx.lineTo(this.xPosition + 2 * sideLength, y - sideLength)
+        ctx.lineTo(this.xPosition + 2 * sideLength, y)
+        ctx.lineTo(this.xPosition + 3 * sideLength, y)
+        ctx.lineTo(this.xPosition + 3 * sideLength, y - sideLength)
+
+        ctx.stroke()
+    }
+}
+
+const Line = new LineShape()
+
+Line.draw(sideLength)
+
 // // make some basic shapes
 // function drawTri(x, y) {
 //     ctx.beginPath()
