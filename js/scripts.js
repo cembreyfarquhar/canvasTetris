@@ -17,9 +17,29 @@ canvas.height = mapHeight
 
 const ctx = document.getElementById('canvas').getContext('2d')
 
-// class for Line shape
-class LineShape {
+// class for every shape
+class Shape {
     constructor() {
+        this.edges = []
+    }
+
+    drawLine = (x, y) => {
+        ctx.lineTo(x, y)
+    }
+
+    addEdge = (start, end) => {
+        this.edges.push([start, end])
+    }
+
+    clearEdges = () => {
+        this.edges = []
+    }
+}
+
+// class for Line shape
+class LineShape extends Shape {
+    constructor(Shape) {
+        super(Shape)
         this.xPosition = this.getRandomX()
     }
 
@@ -32,22 +52,36 @@ class LineShape {
     draw = y => {
         ctx.beginPath()
         ctx.moveTo(this.xPosition, y)
-        ctx.lineTo(this.xPosition + 4 * sideLength, y)
-        ctx.lineTo(this.xPosition + 4 * sideLength, y - sideLength)
-        ctx.lineTo(this.xPosition, y - sideLength)
-        ctx.lineTo(this.xPosition, y)
-        ctx.lineTo(this.xPosition + 1 * sideLength, y)
-        ctx.lineTo(this.xPosition + 1 * sideLength, y - sideLength)
-        ctx.lineTo(this.xPosition + 2 * sideLength, y - sideLength)
-        ctx.lineTo(this.xPosition + 2 * sideLength, y)
-        ctx.lineTo(this.xPosition + 3 * sideLength, y)
-        ctx.lineTo(this.xPosition + 3 * sideLength, y - sideLength)
+        this.drawLine(this.xPosition + 4 * sideLength, y)
+        this.addEdge([this.xPosition, y], [this.xPosition + 4 * sideLength, y])
+
+        this.drawLine(this.xPosition + 4 * sideLength, y - sideLength)
+        this.addEdge(this.getLastPoint(), [
+            this.xPosition + 4 * sideLength,
+            y - sideLength
+        ])
+
+        this.drawLine(this.xPosition, y - sideLength)
+        this.drawLine(this.xPosition, y)
+        this.drawLine(this.xPosition + 1 * sideLength, y)
+        this.drawLine(this.xPosition + 1 * sideLength, y - sideLength)
+        this.drawLine(this.xPosition + 2 * sideLength, y - sideLength)
+        this.drawLine(this.xPosition + 2 * sideLength, y)
+        this.drawLine(this.xPosition + 3 * sideLength, y)
+        this.drawLine(this.xPosition + 3 * sideLength, y - sideLength)
 
         ctx.stroke()
+    }
+
+    getLastPoint = () => this.edges[this.edges.length - 1][1]
+
+    getEdges = () => {
+        return this.edges
     }
 }
 
 const Line = new LineShape()
+Line.clearEdges()
 
 Line.draw(sideLength)
 
@@ -88,3 +122,7 @@ Line.draw(sideLength)
 // }
 
 play()
+
+function play() {
+    console.log(Line.getEdges())
+}
