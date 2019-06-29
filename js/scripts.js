@@ -2,7 +2,7 @@ const canvas = document.querySelector('#canvas')
 
 const sideLength = 44
 const halfL = sideLength / 2
-const blocksHigh = 20
+const blocksHigh = 21
 const blocksWide = 12
 
 // margin 4 on each side
@@ -12,9 +12,10 @@ const blocksWide = 12
 const mapWidth = 528
 canvas.width = mapWidth
 
-const mapHeight = window.screen.availHeight - sideLength * 3
+const mapHeight = 924
 canvas.height = mapHeight
 
+console.log(window.screen.availHeight)
 const ctx = document.getElementById('canvas').getContext('2d')
 
 class Block {
@@ -31,12 +32,12 @@ class Block {
 // draw a grid over the matrix PROGRAMATICALLY
 
 // horizontal lines
-for (let i = 1; i <= 12; i++) {
+for (let i = 1; i < blocksWide; i++) {
     ctx.moveTo(sideLength * i, 0)
     ctx.lineTo(sideLength * i, sideLength * 21)
 }
 // vertical lines
-for (let i = 1; i <= 20; i++) {
+for (let i = 1; i < blocksHigh; i++) {
     ctx.moveTo(0, sideLength * i)
     ctx.lineTo(sideLength * 12, sideLength * i)
 }
